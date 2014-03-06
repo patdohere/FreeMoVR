@@ -1,1 +1,2 @@
 Patrick Do
+Chynna Velasco
