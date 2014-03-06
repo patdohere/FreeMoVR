@@ -53,6 +53,7 @@ namespace FreeMoVR_App
                 if (webSocket == null)
                 {
                     //ServerAddressField is in xaml..and I am getting the Text of that
+                    //Blah
                     Uri server = new Uri(ServerAddressField.Text.Trim());
 
                     webSocket = new MessageWebSocket();
