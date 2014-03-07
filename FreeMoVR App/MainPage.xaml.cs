@@ -38,6 +38,7 @@ namespace FreeMoVR_App
         public MainPage()
         {
             this.InitializeComponent();
+            //Button_Click(null, null);
         }
 
 
@@ -46,16 +47,16 @@ namespace FreeMoVR_App
         {
             try
             {
+                //creates a new MessageWebSocket and connects to WebSocket server and sends data to server
+                
                 //Make a local copy
                 MessageWebSocket webSocket = messageWebSocket;
 
                 //Have we connected yet?
                 if (webSocket == null)
                 {
-                    //ServerAddressField is in xaml..and I am getting the Text of that
-                    //Blah
-                    Uri server = new Uri(ServerAddressField.Text.Trim());
 
+                    Uri server = new Uri(ServerAddressField.Text.Trim());
                     webSocket = new MessageWebSocket();
                     webSocket.Control.MessageType = SocketMessageType.Utf8;
                     webSocket.MessageReceived += MessageReceived;
@@ -72,7 +73,7 @@ namespace FreeMoVR_App
             }
             catch (Exception ex)
             {
-
+                String.Format("There is an error in connection"); 
             }
         }
 
@@ -89,6 +90,7 @@ namespace FreeMoVR_App
             }
             catch (Exception ex)
             {
+                String.Format("There is an error sending the data"); 
             }
         }
 
@@ -102,9 +104,6 @@ namespace FreeMoVR_App
                 webSocket.Dispose();
             }
         }
-
-
-
 
         //BLE button
         private void Button_Click_1(object sender, RoutedEventArgs e)

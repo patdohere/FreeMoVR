@@ -6,11 +6,11 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Button Content="WebSockets;" HorizontalAlignment="Left" Margin="161,86,0,0" VerticalAlignment="Top" Height="70" Width="407" Click="Button_Click"/>
-        <Button Content="BLE" HorizontalAlignment="Left" Margin="161,186,0,0" VerticalAlignment="Top" Height="62" Width="407" Click="Button_Click_1"/>
-        <TextBox HorizontalAlignment="Left" Margin="629,121,0,0" TextWrapping="Wrap" VerticalAlignment="Top" TextChanged="TextBox_TextChanged" Text="InputField&#xD;&#xA;" Height="14" Width="92"/>
-        <TextBox HorizontalAlignment="Left" Height="36" Margin="593,80,0,0" TextWrapping="Wrap" Text="ServerAddressField" VerticalAlignment="Top" Width="189" TextChanged="TextBox_TextChanged_1"/>
+    <Grid x:Name="Layout" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Button Content="WebSockets" HorizontalAlignment="Left" Margin="161,86,0,0" VerticalAlignment="Top" Height="70" Width="407" Click="Button_Click"/>
+        <Button Content="BLE" HorizontalAlignment="Left" Margin="161,186,0,0" VerticalAlignment="Top" Height="63" Width="407" Click="Button_Click_1"/>
+        <TextBox x:Name="InputField" HorizontalAlignment="Left" Margin="629,121,0,0" TextWrapping="Wrap" VerticalAlignment="Top" TextChanged="TextBox_TextChanged" Text="Hello World :D" Height="14" Width="92"/>
+        <TextBox x:Name="ServerAddressField" HorizontalAlignment="Left" Height="36" Margin="593,80,0,0" TextWrapping="Wrap" Text="http://localhost:8080/" VerticalAlignment="Top" Width="189"/>
 
     </Grid>
 </Page>
