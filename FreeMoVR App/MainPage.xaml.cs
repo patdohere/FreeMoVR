@@ -21,7 +21,6 @@ using System.Threading.Tasks;
 using Windows.Networking.BackgroundTransfer;
 
 
-
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace FreeMoVR_App
@@ -42,40 +41,40 @@ namespace FreeMoVR_App
         }
 
 
-        // WebSockets Button
-        private async void Button_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                //creates a new MessageWebSocket and connects to WebSocket server and sends data to server
+        //// WebSockets Button
+        //private async void Button_Click(object sender, RoutedEventArgs e)
+        //{
+        //    try
+        //    {
+        //        //creates a new MessageWebSocket and connects to WebSocket server and sends data to server
                 
-                //Make a local copy
-                MessageWebSocket webSocket = messageWebSocket;
+        //        //Make a local copy
+        //        MessageWebSocket webSocket = messageWebSocket;
 
-                //Have we connected yet?
-                if (webSocket == null)
-                {
+        //        //Have we connected yet?
+        //        if (webSocket == null)
+        //        {
 
-                    Uri server = new Uri(ServerAddressField.Text.Trim());
-                    webSocket = new MessageWebSocket();
-                    webSocket.Control.MessageType = SocketMessageType.Utf8;
-                    webSocket.MessageReceived += MessageReceived;
-                    webSocket.Closed += Closed;
-                    await webSocket.ConnectAsync(server);
-                    messageWebSocket = webSocket;
-                    messageWriter = new DataWriter(webSocket.OutputStream);
-                }
+        //            Uri server = new Uri(ServerAddressField.Text.Trim());
+        //            webSocket = new MessageWebSocket();
+        //            webSocket.Control.MessageType = SocketMessageType.Utf8;
+        //            webSocket.MessageReceived += MessageReceived;
+        //            webSocket.Closed += Closed;
+        //            await webSocket.ConnectAsync(server);
+        //            messageWebSocket = webSocket;
+        //            messageWriter = new DataWriter(webSocket.OutputStream);
+        //        }
 
-                //InputField is a textbox in the xaml
-                string message = InputField.Text;
-                messageWriter.WriteString(message);
-                await messageWriter.StoreAsync();
-            }
-            catch (Exception ex)
-            {
-                String.Format("There is an error in connection"); 
-            }
-        }
+        //        //InputField is a textbox in the xaml
+        //        string message = InputField.Text;
+        //        messageWriter.WriteString(message);
+        //        await messageWriter.StoreAsync();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        String.Format("There is an error in connection"); 
+        //    }
+        //}
 
         //Sends the data
         private void MessageReceived(MessageWebSocket sender, MessageWebSocketMessageReceivedEventArgs args)
@@ -105,15 +104,14 @@ namespace FreeMoVR_App
             }
         }
 
-        //BLE button
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
+        
 
+        private void Websockets_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(Websockets));
         }
 
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
+        /* Pages */
+   
     }
 }
