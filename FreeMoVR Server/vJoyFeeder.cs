@@ -7,7 +7,7 @@ using vJoyInterfaceWrap;
 
 namespace FreeMoVR_Server
 {
-    class vJoyFeeder
+    public class vJoyFeeder
     {
         static public vJoyInterfaceWrap.vJoy joystick;
         static public uint id;
