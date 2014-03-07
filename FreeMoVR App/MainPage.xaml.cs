@@ -22,11 +22,8 @@ using Windows.Networking.BackgroundTransfer;
 
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
-
 namespace FreeMoVR_App
 {
-
-    /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
     public sealed partial class MainPage : Page
@@ -37,7 +34,7 @@ namespace FreeMoVR_App
         public MainPage()
         {
             this.InitializeComponent();
-            //Button_Click(null, null);
+            Button_Click(null, null);
         }
 
 
