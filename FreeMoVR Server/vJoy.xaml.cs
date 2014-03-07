@@ -50,10 +50,13 @@ namespace FreeMoVR_Server
          * SCALED_INPUT may only be used with the GET command, SCALED_INPUT used with SET command will be ignored.
          * STATUS and ACQUIRE do not need attributes or values, if they are included they will be ignored.
          * 
+         * I did my best to make the parser as robust as possible, but there may still be errors!
+         * 
          * Valid instruction Examples:
          * e.g. GET RAW_INPUT 
          * e.g. SET RAW_INPUT 0.1,-0.45
          * e.g. GET SCALED_INPUT
+         * e.g. STATUS
         */
         public String parseInstructionString(String command_attribute_value)
         {
@@ -91,7 +94,7 @@ namespace FreeMoVR_Server
                 {
                     return getXYscaled();
                 }
-                else { return "Bad instruction: RAW_INPUT or SCALED_INPUT only!"; }
+                else { return "BAD instruction: RAW_INPUT or SCALED_INPUT only!"; }
             }
             else if(command.Equals("STATUS"))
             {
@@ -104,7 +107,7 @@ namespace FreeMoVR_Server
                 //output acquire success text
                 return "ACQUIRE has not been implemented yet";
             }
-            else { return "Bad instruction: SET, GET, STATUS, ACQUIRE only!"; }
+            else { return "BAD instruction: SET, GET, STATUS, ACQUIRE only!"; }
         }
 
         //Input XY raw coords, abtracted up a layer
