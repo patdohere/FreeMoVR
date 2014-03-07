@@ -3,7 +3,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="MainWindow" Height="350" Width="525">
     <Grid x:Name="Layout" VerticalAlignment="Center">
-        <TextBlock x:Name="Messages" Text="Hello World" FontSize="24" HorizontalAlignment="Center"/>
+            <StackPanel>
+                <TextBlock x:Name="Messages" Text="Hello World" FontSize="24" HorizontalAlignment="Center"/>
+                <Button x:Name="vJoy" Content="vJoy" Width="50"/>
+            </StackPanel>
     </Grid>
 
 
