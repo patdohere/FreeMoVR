@@ -13,6 +13,8 @@
     <description>The goal of MahApps.Metro is to allow devs to quickly and easily cobble togther a "Metro" UI for their WPF4+ apps, with minimal effort.</description>
     <summary>The goal of MahApps.Metro is to allow devs to quickly and easily cobble togther a "Metro" UI for their WPF4+ apps, with minimal effort.</summary>
     <releaseNotes />
+    <copyright />
+    <language />
     <tags>WPF UI Metro</tags>
   </metadata>
 </package>
