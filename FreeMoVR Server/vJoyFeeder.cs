@@ -32,10 +32,10 @@ namespace FreeMoVR_Server
          * SET (input x y coords to vJoy) | GET (retrieve current x y coords from vJoy) | STATUS (is joystick active?) | ACQUIRE (acquire vJoy driver)
          * 
          * Current valid ATTRIBUTES:
-         * RAW_INPUT (x y coords without conversion)| SCALED_INPUT(x y coords with conversion) 
+         * RAW_INPUT (x y coords without conversion)| SCALED_INPUT(x y coords with conversion)  | BUTTON_PRESS (simulates a button press
          * 
          * Current valid VALUES (both x and y values must be inputted together):
-         * X_Y (The format must be X,Y)
+         * X_Y (The format must be X,Y) | N (Number below 10)
          * 
          * IMPORTANT!!!
          * 1. YOU MUST DETERMINE IF DRIVER IS ENABLED OR NOT FIRST.
@@ -59,29 +59,44 @@ namespace FreeMoVR_Server
             string[] tokenlist = command_attribute_value.Split(' '); // split by whitespace
 
             //put each token into temp variable
+            
+            
             string command = tokenlist[0];
-            string attribute = tokenlist[1];
-            string value = tokenlist[2];
+            string attribute;
+            string value;
 
             //parse logic
             if (command.Equals("SET"))
             {
+                attribute = tokenlist[1];
                 if (attribute.Equals("RAW_INPUT"))
                 {
+                    Console.WriteLine("Made it into raw input\n");
                     //X must precede Y!
+                    value = tokenlist[2];
                     string[] coords = value.Split(',');
                     double X = double.Parse(coords[0]);
                     double Y = double.Parse(coords[1]);
                     if (X < 1.0 && Y < 1.0 && X > -1.0 && Y > -1.0)
                     {
+                        
                         return inputRawCoords(X,Y);
                     }
                     else { return "BAD instruction: X or Y is out of bounds!"; }
+                }
+                else if(attribute.Equals("BUTTON_PRESS"))
+                {
+                    Console.WriteLine("Made it into button press\n");
+                    value = tokenlist[2];
+                    int n = int.Parse(value);
+                    return pushButton((uint)n);
                 }
                 else { return "BAD instruction: RAW_INPUT ONLY!"; }
             }
             else if (command.Equals("GET"))
             {
+                attribute = tokenlist[1];
+                Console.WriteLine("made it into GET");
                 if (attribute.Equals("RAW_INPUT"))
                 {
                     return retrieveRawCoords();
@@ -166,6 +181,21 @@ namespace FreeMoVR_Server
             int xScaled = (int)Math.Floor(16384 * xRaw) + 16384;
             int yScaled = (int)Math.Floor(16384 * yRaw) + 16384;
             return "xScaled: " + xScaled + " yScaled " + yScaled;
+        }
+
+        //used for button pushes
+        private string pushButton(uint n)
+        {
+            joystick.SetBtn(true, id, n);
+            joystick.SetBtn(false, id, n); //release button right after it is pushed
+            return "Button " + n + " has been pushed!";
+        }
+
+        //function may or may not be used
+        private string releaseButton(uint n)
+        {
+            joystick.SetBtn(false, id, n);
+            return "Button " + n + " has been released!";
         }
 
     }
