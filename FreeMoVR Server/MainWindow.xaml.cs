@@ -97,11 +97,13 @@ namespace FreeMoVR_Server
                   + nextPage.Name.ToString());
         }
 
+        /*
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Switcher.pageSwitcher = this;
             Switcher.Switch(new Controller());
         }
+        */
        
     }
 
@@ -125,6 +127,7 @@ namespace FreeMoVR_Server
             pageSwitcher.Navigate(newPage, state);
         }
     }
+        
 
+    }
 
-}

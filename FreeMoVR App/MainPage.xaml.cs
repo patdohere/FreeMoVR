@@ -34,7 +34,7 @@ namespace FreeMoVR_App
         public MainPage()
         {
             this.InitializeComponent();
-            Button_Click(null, null);
+            //Button_Click(null, null);
         }
 
 
