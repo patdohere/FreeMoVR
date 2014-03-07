@@ -13,6 +13,8 @@ namespace FreeMoVR_Server
         static public uint id;
         static public double xRaw;
         static public double yRaw;
+
+        //feeder application constructor, setup joystick instance and acquire the joystick driver installed on machine.
         public vJoyFeeder()
         {
             // Console.WriteLine(displayJoyDriverInfo());
@@ -34,6 +36,20 @@ namespace FreeMoVR_Server
             //Console.WriteLine("vJoy input is live!");
         }
 
+        //Returns whether the driver is enabled
+        public bool isVJOYenabled()
+        {
+            return joystick.vJoyEnabled();
+        }
+
+        //Acquire vJoy driver
+        public bool acquireVJOYdriver()
+        {
+            joystick.AcquireVJD(id);
+            return true;
+        }
+
+        //retrieve driver info
         private string displayJoyDriverInfo()
         {
             String a = joystick.GetvJoyManufacturerString();
@@ -43,7 +59,7 @@ namespace FreeMoVR_Server
             return a + " | " + b + " | " + c;
         }
 
-
+        //set joystick axis, private class to be called
         private bool setConvertedJoystickAxis()
         {
             //no motion in joystick is X = 16383, Y = 16383
@@ -56,6 +72,7 @@ namespace FreeMoVR_Server
             return true;
         }
 
+        //input joystick axis, call conversion and set function
         public string inputRawCoords(double inputX, double inputY)
         {
             xRaw = inputX;
@@ -64,11 +81,13 @@ namespace FreeMoVR_Server
             return "Raw coords inputted X: " + xRaw + " Y: " + yRaw;
         }
 
+        //retrieve raw coords, used for debugging.
         public string retrieveRawCoords()
         {
             return "xRaw: " + xRaw + " yRaw: " + yRaw;
         }
 
+        //retrieve scaled coords, used for debugging.
         public string retrieveScaledCoords()
         {
             int xScaled = (int)Math.Floor(16384 * xRaw) + 16384;
