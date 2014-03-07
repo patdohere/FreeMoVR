@@ -14,6 +14,11 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
+using Windows.Networking.Sockets;
+using Windows.Storage.Streams;
+using System.Threading;
+using System.Threading.Tasks;
+
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234237
 
 namespace FreeMoVR_App
@@ -26,6 +31,10 @@ namespace FreeMoVR_App
 
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
+
+        // Websockets Application
+        private MessageWebSocket messageWebSocket;
+        private DataWriter messageWriter;
 
         /// <summary>
         /// This can be changed to a strongly typed view model.
@@ -83,6 +92,85 @@ namespace FreeMoVR_App
         {
         }
 
+        /* Websockets begin */
+
+        private async void Button_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                //creates a new MessageWebSocket and connects to WebSocket server and sends data to server
+
+                //Make a local copy
+                MessageWebSocket webSocket = messageWebSocket;
+
+                //Have we connected yet?
+                if (webSocket == null)
+                {
+
+                    Uri server = new Uri(ServerAddressField.Text.Trim());
+                    webSocket = new MessageWebSocket();
+                    webSocket.Control.MessageType = SocketMessageType.Utf8;
+                    webSocket.MessageReceived += MessageReceived;
+                    webSocket.Closed += Closed;
+                    await webSocket.ConnectAsync(server);
+                    messageWebSocket = webSocket;
+                    messageWriter = new DataWriter(webSocket.OutputStream);
+                }
+
+                //InputField is a textbox in the xaml
+                string message = InputField.Text;
+                messageWriter.WriteString(message);
+                await messageWriter.StoreAsync();
+            }
+            catch (Exception ex)
+            {
+                String.Format("There is an error in connection");
+            }
+        }
+
+        //Sends the data
+        private void MessageReceived(MessageWebSocket sender, MessageWebSocketMessageReceivedEventArgs args)
+        {
+            try
+            {
+                using (DataReader reader = args.GetDataReader())
+                {
+                    reader.UnicodeEncoding = Windows.Storage.Streams.UnicodeEncoding.Utf8;
+                    string read = reader.ReadString(reader.UnconsumedBufferLength);
+                }
+            }
+            catch (Exception ex)
+            {
+                String.Format("There is an error sending the data");
+            }
+        }
+
+
+        // Close connection
+        private void Closed(IWebSocket sender, WebSocketClosedEventArgs args)
+        {
+            MessageWebSocket webSocket = Interlocked.Exchange(ref messageWebSocket, null);
+            if (webSocket != null)
+            {
+                webSocket.Dispose();
+            }
+        }
+
+
+
+        private void Websockets_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(Websockets));
+        }
+
+        private void BLE_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(BLE));
+        }
+
+
+        /* Websockets end */
+
         #region NavigationHelper registration
 
         /// The methods provided in this section are simply used to allow
@@ -105,5 +193,7 @@ namespace FreeMoVR_App
         }
 
         #endregion
+
+
     }
 }
