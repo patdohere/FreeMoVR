@@ -18,7 +18,7 @@ namespace FreeMoVR_Server
     /// <summary>
     /// Interaction logic for vJoy.xaml
     /// </summary>
-    public partial class vJoy : Page
+    public partial class vJoy : UserControl
     {
         public vJoy()
         {

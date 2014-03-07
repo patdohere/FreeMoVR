@@ -100,12 +100,14 @@ namespace FreeMoVR_Server
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Switcher.pageSwitcher = this;
-            Switcher.Switch(new Controller());
+            Switcher.Switch(new vJoy());    //Navigate to the vJoy User Control
         }
        
     }
 
 
+
+    // Needed for navigation
     public interface ISwitchable
     {
         void UtilizeState(object state);

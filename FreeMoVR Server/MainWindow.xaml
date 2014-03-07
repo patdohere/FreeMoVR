@@ -4,9 +4,9 @@
         Title="MainWindow" Height="350" Width="525">
     <Grid x:Name="Layout" VerticalAlignment="Center">
             <StackPanel>
-                <TextBlock x:Name="Messages" Text="Hello World" FontSize="24" HorizontalAlignment="Center"/>
-                <Button x:Name="vJoy" Content="vJoy" Width="50"/>
-            </StackPanel>
+                <TextBlock x:Name="Messages" Text="Hello World" FontSize="32" HorizontalAlignment="Center" FontFamily="Segoe UI Light"/>
+                <!--<Button x:Name="vJoy" Content="vJoy" Width="50"/>-->
+        </StackPanel>
     </Grid>
 
 
