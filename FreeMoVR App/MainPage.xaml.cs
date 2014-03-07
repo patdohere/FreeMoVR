@@ -111,6 +111,11 @@ namespace FreeMoVR_App
             Frame.Navigate(typeof(Websockets));
         }
 
+        private void BLE_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(BLE));
+        }
+
         /* Pages */
    
     }

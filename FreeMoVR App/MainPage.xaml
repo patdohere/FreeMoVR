@@ -6,10 +6,10 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-    <Grid x:Name="Layout" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid x:Name="Layout" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" VerticalAlignment="Center">
         <StackPanel>
             <Button x:Name="Websockets" Content="Websockets" HorizontalAlignment="Center" Click="Websockets_Click"/>
-            <Button x:Name="BLE" Content="BLE" HorizontalAlignment="Center"/>
+            <Button x:Name="BLE" Content="BLE" HorizontalAlignment="Center" Click="BLE_Click"/>
         </StackPanel>
         
 
