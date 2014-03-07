@@ -26,8 +26,12 @@ namespace FreeMoVR_Server
     /// 
     public partial class MainWindow : Window
     {
+        
         public MainWindow()
         {
+            //hardcoded vJoyFeeder class for testing
+            //vJoyFeeder vj = new vJoyFeeder();
+            //vj.parseInstructionString("SET RAW_INPUT -0.1,0.56");
             InitializeComponent();
 
             //var server = new WebSocketServer("http://localhost:8080");
