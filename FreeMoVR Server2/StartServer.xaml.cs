@@ -13,17 +13,22 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace FreeMoVR_Server
+namespace FreeMoVR_Server2
 {
     /// <summary>
-    /// Interaction logic for vJoy.xaml
+    /// Interaction logic for StartServer.xaml
     /// </summary>
-    public partial class vJoy : UserControl
+    public partial class StartServer : UserControl
     {
-       
-        public vJoy()
+        public StartServer()
         {
             InitializeComponent();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Switcher.Switch(new RunServer());
+
         }
     }
 }

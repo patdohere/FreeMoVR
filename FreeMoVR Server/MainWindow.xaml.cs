@@ -26,8 +26,12 @@ namespace FreeMoVR_Server
     /// 
     public partial class MainWindow : Window
     {
+        
         public MainWindow()
         {
+            //hardcoded vJoyFeeder class for testing, is this where we want to call the class?
+            vJoyFeeder vj = new vJoyFeeder();
+            
             InitializeComponent();
 
             //var server = new WebSocketServer("http://localhost:8080");
@@ -57,6 +61,9 @@ namespace FreeMoVR_Server
                 };
                 socket.OnMessage = message =>
                 {
+                    // This is the only line of code that outputs to console. Each instruction given to parser will return a string, which
+                    // can then be used in the windows APP UI.
+                    Console.WriteLine(vj.parseInstructionString(message));
                     Console.WriteLine(message);
                     allSockets.ToList().ForEach(s => s.Send("Echo: " + message));
                 };
@@ -70,6 +77,7 @@ namespace FreeMoVR_Server
                 {
                     socket.Send(input);
                 }
+                
                 input = Console.ReadLine();
             }
 
@@ -101,13 +109,15 @@ namespace FreeMoVR_Server
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Switcher.pageSwitcher = this;
-            Switcher.Switch(new Controller());
+            Switcher.Switch(new vJoy());    //Navigate to the vJoy User Control
         }
         */
        
     }
 
 
+
+    // Needed for navigation
     public interface ISwitchable
     {
         void UtilizeState(object state);

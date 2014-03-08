@@ -30,6 +30,12 @@
             <RowDefinition Height="140"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
+        
+        <!-- Websockets Content -->
+        <TextBlock Grid.Row="1" VerticalAlignment="Top" Text="Hello there!!" Height="500" FontSize="24"/>
+        <TextBox Grid.Row="1" VerticalAlignment="Bottom" Text="Write your input here!!" Width="600" Padding="10" FontSize="20" FontFamily="Segoe UI Light"/>
+        <TextBlock Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Right" Text="localhost:8181" Padding="10" FontSize="24"/>
+        
 
         <!-- Back button and page title -->
         <Grid>
