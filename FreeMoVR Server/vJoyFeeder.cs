@@ -31,7 +31,8 @@ namespace FreeMoVR_Server
         /* Instructions for parsing
          * Instruction string will be parsed as COMMAND / ATTRIBUTE / VALUE, with each token separated by whitespace
          * Current valid COMMANDS:
-         * SET (input x y coords to vJoy) | GET (retrieve current x y coords from vJoy) | STATUS (is joystick active?) | ACQUIRE (acquire vJoy driver)
+         * SET (input x y coords to vJoy) | GET (retrieve current x y coords from vJoy) | STATUS (is joystick active?) 
+         * ACQUIRE (get the vjoy driver (id is hardcoded to 1) | RELEASE (release the vjoy driver)
          * 
          * Current valid ATTRIBUTES:
          * RAW_INPUT (x y coords without conversion)| SCALED_INPUT(x y coords with conversion)  | BUTTON_PRESS (simulates a button press
@@ -43,11 +44,14 @@ namespace FreeMoVR_Server
          * 1. YOU MUST DETERMINE IF DRIVER IS ENABLED OR NOT FIRST.
          * 2. YOU MUST ACQUIRE THE DRIVER ( ACQUIRE is currently automatically done, i have the methods written if
          * we want to manually acquire from the server later, remember to remove auto acquire from vJoyFeeder class)
-         * 3. Button functionality has been removed, it will not be used with sensortag input. Instead, set functionality to keyboard instead
+         * 3. BUTTON_PRESS functionality has been removed, it will not be used with sensortag input. Instead, set functionality to keyboard instead
          * if testing is desired.
          * 4. Get functions do not need to set a value, values included with GET token will be ignored.
          * 5. SCALED_INPUT may only be used with the GET command, SCALED_INPUT used with SET command will be ignored.
-         * 6. STATUS and ACQUIRE do not need attributes or values, if they are included they will be ignored.
+         * 6. STATUS, ACQUIRE, RLEASE do not need attributes or values, if they are included they will be ignored.
+         * 7. ACCQUIRE/RELEASE are not actually called because acquire is called automatically when class is constructed. If joystick driver
+         * is released, there is no way of acquiring it again unless the entire vJoyFeeder instance is created again. However, ACQUIRE/RELEASE
+         * functionality can be implemented if desired.
          * 
          * I did my best to make the parser as robust as possible, but there may still be errors!
          * 
@@ -110,7 +114,7 @@ namespace FreeMoVR_Server
                         return "ERROR: You didn't set values properly!";
                     }
                     
-                    if (X < 1.0 && Y < 1.0 && X > -1.0 && Y > -1.0)
+                    if (X <= 1.0 && Y <= 1.0 && X >= -1.0 && Y >= -1.0)
                     {   
                         return inputRawCoords(X,Y);
                     }
@@ -152,11 +156,18 @@ namespace FreeMoVR_Server
             else if (command.Equals("ACQUIRE"))
             {
                 //only if we want to input this command
-                //vjfeed.acquireVJOYdriver();
+                //acquireVJOYdriver();
                 //output acquire success text
+                
                 return "ACQUIRE Command is automatically done";
             }
-            else { return "BAD instruction: SET, GET, STATUS, ACQUIRE only!"; }
+            else if (command.Equals("RELEASE"))
+            {
+                //releaseJoystick();
+                return "RELEASE Command is not available, since ACQUIRE is automatically done. Just close the application and re-run.";
+            }
+            
+            else { return "BAD instruction: SET, GET, STATUS, ACQUIRE, RELEASE only!"; }
         }
 
         //Returns whether the driver is enabled
@@ -236,6 +247,13 @@ namespace FreeMoVR_Server
         {
             joystick.SetBtn(false, id, n);
             return "Button " + n + " has been released!";
+        }
+
+        //Release joystick
+        private string releaseJoystick()
+        {
+            joystick.RelinquishVJD(id);
+            return "Joystick has been released";
         }
 
     }

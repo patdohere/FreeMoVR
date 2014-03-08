@@ -29,7 +29,7 @@ namespace FreeMoVR_Server
         
         public MainWindow()
         {
-            //hardcoded vJoyFeeder class for testing
+            //hardcoded vJoyFeeder class for testing, is this where we want to call the class?
             vJoyFeeder vj = new vJoyFeeder();
             
             InitializeComponent();
@@ -61,6 +61,8 @@ namespace FreeMoVR_Server
                 };
                 socket.OnMessage = message =>
                 {
+                    // This is the only line of code that outputs to console. Each instruction given to parser will return a string, which
+                    // can then be used in the windows APP UI.
                     Console.WriteLine(vj.parseInstructionString(message));
                     Console.WriteLine(message);
                     allSockets.ToList().ForEach(s => s.Send("Echo: " + message));
@@ -75,7 +77,7 @@ namespace FreeMoVR_Server
                 {
                     socket.Send(input);
                 }
-                //Console.WriteLine(vj.parseInstructionString(input));
+                
                 input = Console.ReadLine();
             }
 
