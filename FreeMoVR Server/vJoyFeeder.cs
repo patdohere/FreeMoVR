@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+
 using vJoyInterfaceWrap;
 
 namespace FreeMoVR_Server
@@ -41,9 +43,11 @@ namespace FreeMoVR_Server
          * 1. YOU MUST DETERMINE IF DRIVER IS ENABLED OR NOT FIRST.
          * 2. YOU MUST ACQUIRE THE DRIVER ( ACQUIRE is currently automatically done, i have the methods written if
          * we want to manually acquire from the server later, remember to remove auto acquire from vJoyFeeder class)
-         * Get functions do not need to set a value, values included with GET token will be ignored.
-         * SCALED_INPUT may only be used with the GET command, SCALED_INPUT used with SET command will be ignored.
-         * STATUS and ACQUIRE do not need attributes or values, if they are included they will be ignored.
+         * 3. Button functionality has been removed, it will not be used with sensortag input. Instead, set functionality to keyboard instead
+         * if testing is desired.
+         * 4. Get functions do not need to set a value, values included with GET token will be ignored.
+         * 5. SCALED_INPUT may only be used with the GET command, SCALED_INPUT used with SET command will be ignored.
+         * 6. STATUS and ACQUIRE do not need attributes or values, if they are included they will be ignored.
          * 
          * I did my best to make the parser as robust as possible, but there may still be errors!
          * 
@@ -55,8 +59,12 @@ namespace FreeMoVR_Server
         */
         public String parseInstructionString(String command_attribute_value)
         {
+            //Console.WriteLine("INStRUCTION HAS BEEN ENTERED");
+            //Console.WriteLine("FROM INSIDE PARSE " + command_attribute_value);
 
-            string[] tokenlist = command_attribute_value.Split(' '); // split by whitespace
+            // The "formatted" gets rid of any new lines and linebreaks that may be inserted when text is inputted from websocket
+            string formatted = Regex.Replace(command_attribute_value, @"\r\n?|\n", ""); 
+            string[] tokenlist = formatted.Split(' '); // split by whitespace
 
             //put each token into temp variable
             
@@ -65,38 +73,68 @@ namespace FreeMoVR_Server
             string attribute;
             string value;
 
+           // Console.WriteLine("current command: " + command);
             //parse logic
+
             if (command.Equals("SET"))
             {
-                attribute = tokenlist[1];
+                
+               
+               try { attribute = tokenlist[1]; }
+               catch(IndexOutOfRangeException e)
+               {
+                   return "ERROR: You didn't set an attribute!";
+               }
                 if (attribute.Equals("RAW_INPUT"))
                 {
-                    Console.WriteLine("Made it into raw input\n");
+                   // Console.WriteLine("Made it into raw input\n");
                     //X must precede Y!
-                    value = tokenlist[2];
-                    string[] coords = value.Split(',');
-                    double X = double.Parse(coords[0]);
-                    double Y = double.Parse(coords[1]);
-                    if (X < 1.0 && Y < 1.0 && X > -1.0 && Y > -1.0)
+
+                    try { value = tokenlist[2]; ; }
+                    catch (IndexOutOfRangeException e)
                     {
                         
+                        return "ERROR: You didn't set the values!";
+                    }
+                   
+                    string[] coords = value.Split(',');
+
+                    double X, Y;
+                    try
+                    {
+                        X = double.Parse(coords[0]);
+                        Y = double.Parse(coords[1]);
+                    }
+                    catch (IndexOutOfRangeException e)
+                    {
+                        return "ERROR: You didn't set values properly!";
+                    }
+                    
+                    if (X < 1.0 && Y < 1.0 && X > -1.0 && Y > -1.0)
+                    {   
                         return inputRawCoords(X,Y);
                     }
                     else { return "BAD instruction: X or Y is out of bounds!"; }
                 }
-                else if(attribute.Equals("BUTTON_PRESS"))
-                {
-                    Console.WriteLine("Made it into button press\n");
-                    value = tokenlist[2];
-                    int n = int.Parse(value);
-                    return pushButton((uint)n);
-                }
+                //else if(attribute.Equals("BUTTON_PRESS"))
+                //{
+                //    Console.WriteLine("Made it into button press\n");
+                //    value = tokenlist[2];
+                //    int n = int.Parse(value);
+                //    return pushButton((uint)n);
+                //}
                 else { return "BAD instruction: RAW_INPUT ONLY!"; }
             }
             else if (command.Equals("GET"))
             {
+                try { attribute = tokenlist[1]; }
+                catch (IndexOutOfRangeException e)
+                {
+                    return "ERROR: You didn't set an attribute!";
+                }
+
                 attribute = tokenlist[1];
-                Console.WriteLine("made it into GET");
+               // Console.WriteLine("made it into GET");
                 if (attribute.Equals("RAW_INPUT"))
                 {
                     return retrieveRawCoords();
@@ -154,6 +192,7 @@ namespace FreeMoVR_Server
             // y  = 16384x + 16384, calculation is done in this method
             int xScaled = (int)Math.Floor(16384 * xRaw) + 16384;
             int yScaled = (int)Math.Floor(16384 * yRaw) + 16384;
+            //Console.WriteLine("raw value in convert function X: " + xRaw + " Y: " + yRaw);
             joystick.SetAxis(xScaled, id, HID_USAGES.HID_USAGE_X);
             joystick.SetAxis(yScaled, id, HID_USAGES.HID_USAGE_Y);
             // return "Values set as X: " + xScaled + " Y: " + yScaled;
@@ -165,6 +204,7 @@ namespace FreeMoVR_Server
         {
             xRaw = inputX;
             yRaw = inputY;
+            //Console.WriteLine("raw value in input function X: " + xRaw + " Y: " + yRaw);
             convertAndSetJoystickAxis();
             return "Raw coords inputted X: " + xRaw + " Y: " + yRaw;
         }
@@ -180,7 +220,7 @@ namespace FreeMoVR_Server
         {
             int xScaled = (int)Math.Floor(16384 * xRaw) + 16384;
             int yScaled = (int)Math.Floor(16384 * yRaw) + 16384;
-            return "xScaled: " + xScaled + " yScaled " + yScaled;
+            return "xScaled: " + xScaled + " yScaled: " + yScaled;
         }
 
         //used for button pushes

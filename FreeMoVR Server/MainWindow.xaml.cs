@@ -30,7 +30,7 @@ namespace FreeMoVR_Server
         public MainWindow()
         {
             //hardcoded vJoyFeeder class for testing
-           // vJoyFeeder vj = new vJoyFeeder();
+            vJoyFeeder vj = new vJoyFeeder();
             
             InitializeComponent();
 
@@ -61,6 +61,7 @@ namespace FreeMoVR_Server
                 };
                 socket.OnMessage = message =>
                 {
+                    Console.WriteLine(vj.parseInstructionString(message));
                     Console.WriteLine(message);
                     allSockets.ToList().ForEach(s => s.Send("Echo: " + message));
                 };
@@ -74,6 +75,7 @@ namespace FreeMoVR_Server
                 {
                     socket.Send(input);
                 }
+                //Console.WriteLine(vj.parseInstructionString(input));
                 input = Console.ReadLine();
             }
 
