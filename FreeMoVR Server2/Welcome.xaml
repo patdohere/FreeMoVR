@@ -9,6 +9,12 @@
         <StackPanel HorizontalAlignment="Center">
             <TextBlock Text="Hello there." FontSize="24" HorizontalAlignment="Center" FontFamily="Segoe UI Light"/>
             <TextBlock Text="Welcome to FreeMoVR." HorizontalAlignment="Center" FontSize="24" FontFamily="Segoe UI Light"/>
+            <Button Content="Start" Width="50" Click="Button_Click"/>
+            
         </StackPanel>
+
+        
     </Grid>
+    
+    
 </UserControl>

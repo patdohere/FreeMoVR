@@ -6,6 +6,31 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="525">
     <Grid>
-            
+        <!-- Grid Layout Definitions -->
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="420"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        
+        <!-- Content -->
+        <TextBlock Grid.Row="0" Grid.Column="0" Margin="3" Padding="3" Text="Hello I'm talking to you~!" FontFamily="Segoe UI Light" FontSize="16" ScrollViewer.CanContentScroll="True"/>
+        <TextBox Grid.Row="1" Grid.Column="0" Margin="3" Padding="3" VerticalAlignment="Center" Text="Input stuff here!" FontFamily="Segoe UI Light" FontSize="16"/>
+
+        <!-- Nyan Cat Test Button. OMGOSH THIS TOOK 5EVER TO FIGURE OUT HOW TO MAKE THIS -->
+        <Button Grid.Row="0" Grid.Column="1" Style="{DynamicResource MetroCircleButtonStyle}"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Width="100" 
+                    Height="100">
+            <Rectangle Height="75" Width="75">
+                <Rectangle.Fill>
+                    <VisualBrush Visual="{StaticResource appbar_nyan}" Stretch="Uniform"/>
+                </Rectangle.Fill>
+            </Rectangle>
+        </Button>
     </Grid>
 </UserControl>
