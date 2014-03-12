@@ -63,9 +63,10 @@ namespace FreeMoVR_Server
                 {
                     // This is the only line of code that outputs to console. Each instruction given to parser will return a string, which
                     // can then be used in the windows APP UI.
-                    Console.WriteLine(vj.parseInstructionString(message));
-                    Console.WriteLine(message);
+
+                    //Console.WriteLine(vj.parseInstructionString(message));
                     allSockets.ToList().ForEach(s => s.Send("Echo: " + message));
+                    allSockets.ToList().ForEach(s => s.Send("Return: " + vj.parseInstructionString(message)));
                 };
             });
 
