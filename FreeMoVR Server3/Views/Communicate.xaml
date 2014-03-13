@@ -1,0 +1,47 @@
+﻿<UserControl x:Class="FreeMoVR_Server3.Views.Communicate"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="525">
+    <Grid Name="Layout">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="250*"/>
+            <RowDefinition Height="50*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="400*"/>
+            
+        </Grid.ColumnDefinitions>
+        
+        
+        <!-- Textbox for console-->
+        <RichTextBox Grid.Row="0"
+                     Grid.Column="0"
+                     Margin="5"
+                             IsReadOnly="True"
+                             Padding="5"
+                             IsDocumentEnabled="True"
+                             ScrollViewer.CanContentScroll="True">
+            <FlowDocument>
+                <Paragraph>
+                    <Hyperlink NavigateUri="https://github.com/MahApps/MahApps.Metro">
+                        <Run Text="ReadOnly" />
+                    </Hyperlink>
+                    <LineBreak />
+                    <Run>Bacon ipsum dolor sit amet venison drumstick meatball ham hock corned beef. Strip steak bacon andouille pig beef short ribs.</Run>
+                </Paragraph>
+            </FlowDocument>
+        </RichTextBox>
+        
+        <!-- Input box for awesomeness! -->
+        <TextBox Grid.Row="1"
+                 Grid.Column="0"
+                 Margin="5"
+                         Controls:TextboxHelper.Watermark="Watermark"
+                         Controls:TextboxHelper.IsWaitingForData="True"
+                         ToolTip="Default alignment" />
+    </Grid>
+</UserControl>
