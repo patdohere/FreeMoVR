@@ -8,13 +8,13 @@ namespace FreeMoVR_Server3
 {
     class MainWindowViewModel
     {
-
+        static private vJoyFeeder vj;
         public MainWindowViewModel()
         {
-            vJoyFeeder vj = new vJoyFeeder();
+            vj = new vJoyFeeder();
 
             // id is already inputted into the class, it is forced as 1.
-            vj.acquire();
+            //vj.acquire();
         }
     }
 }
