@@ -19,7 +19,7 @@ namespace FreeMoVR_Server3
         {
             this.vj = new vJoyFeeder();
             // id is already inputted into the class, it is forced as 1.
-            vj.acquire();
+            //vj.acquire();
 
             this.manufacturer = vj.getManufacturer();
             this.version = vj.getVersion();
