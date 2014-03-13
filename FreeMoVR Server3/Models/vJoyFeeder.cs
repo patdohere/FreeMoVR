@@ -20,17 +20,20 @@ namespace FreeMoVR_Server3
         public vJoyFeeder()
         {
             joystick = new vJoyInterfaceWrap.vJoy();
-
-        }
-
-        public bool acquire()
-        {
             // if there is a missing .dll error here, make sure both vJoyInterface.dll and vJoyInterfaceWrap.dll is added to the project and also added 
             // in the same folder as the debug or release .exe, often times only the vJoyInterfaceWrap.dll is there.
             bool result = joystick.AcquireVJD(id); // this is the code that actually acquires the driver
             inputRawCoords(0.0, 0.0);// set default coordinates upon construction
-            return result;
         }
+
+        //public bool acquire()
+        //{
+        //    // if there is a missing .dll error here, make sure both vJoyInterface.dll and vJoyInterfaceWrap.dll is added to the project and also added 
+        //    // in the same folder as the debug or release .exe, often times only the vJoyInterfaceWrap.dll is there.
+        //    bool result = joystick.AcquireVJD(id); // this is the code that actually acquires the driver
+        //    inputRawCoords(0.0, 0.0);// set default coordinates upon construction
+        //    return result;
+        //}
 
         /* Instructions for parsing
          * Instruction string will be parsed as COMMAND / ATTRIBUTE / VALUE, with each token separated by whitespace
