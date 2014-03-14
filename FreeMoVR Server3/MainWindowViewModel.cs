@@ -15,6 +15,7 @@ namespace FreeMoVR_Server3
 
             // id is already inputted into the class, it is forced as 1.
             //vj.acquire();
+            
         }
     }
 }
