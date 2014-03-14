@@ -39,7 +39,7 @@ namespace FreeMoVR_App2
             string success = "sensor has been enabled!";
             initialize.Content = success;
         }
-
+         
         private async void getInfo(object sender, RoutedEventArgs e)
         {
             byte[] accValue = await acc.ReadValue();
