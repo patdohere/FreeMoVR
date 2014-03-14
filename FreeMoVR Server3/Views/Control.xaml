@@ -49,8 +49,8 @@
         
         <!-- X and Y axis -->
         <StackPanel Grid.Column="1">
-            <Slider Orientation="Horizontal" Width="200" Grid.Row="0" Grid.Column="2" Margin="10"/>
-            <Slider Orientation="Horizontal" Width="200" Grid.Row="0" Grid.Column="2" Margin="10"/>
+            <Slider Orientation="Horizontal" Width="200" Grid.Row="0" Grid.Column="2" Margin="10" IsManipulationEnabled="False"/>
+            <Slider Orientation="Horizontal" Width="200" Grid.Row="0" Grid.Column="2" Margin="10" IsManipulationEnabled="False"/>
         </StackPanel>
     </Grid>
 </UserControl>
