@@ -24,6 +24,7 @@ namespace FreeMoVR_Simple_Server
                 };
                 socket.OnClose = () =>
                 {
+
                     Console.WriteLine("Close!");
                     allSockets.Remove(socket);
                 };
