@@ -25,6 +25,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreeMoVR Simple Client", "F
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreeMoVR Simple Server2", "FreeMoVR Simple Server2\FreeMoVR Simple Server2.csproj", "{203B430C-AE0D-4372-BC29-3793D913FB3F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreeMoVR App2", "FreeMoVR App2\FreeMoVR App2.csproj", "{69582648-7512-4F0C-B126-661998ACB1FC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -136,6 +138,30 @@ Global
 		{203B430C-AE0D-4372-BC29-3793D913FB3F}.Release|ARM.ActiveCfg = Release|Any CPU
 		{203B430C-AE0D-4372-BC29-3793D913FB3F}.Release|x64.ActiveCfg = Release|Any CPU
 		{203B430C-AE0D-4372-BC29-3793D913FB3F}.Release|x86.ActiveCfg = Release|Any CPU
+		{69582648-7512-4F0C-B126-661998ACB1FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69582648-7512-4F0C-B126-661998ACB1FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69582648-7512-4F0C-B126-661998ACB1FC}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{69582648-7512-4F0C-B126-661998ACB1FC}.Debug|ARM.ActiveCfg = Debug|ARM
+		{69582648-7512-4F0C-B126-661998ACB1FC}.Debug|ARM.Build.0 = Debug|ARM
+		{69582648-7512-4F0C-B126-661998ACB1FC}.Debug|ARM.Deploy.0 = Debug|ARM
+		{69582648-7512-4F0C-B126-661998ACB1FC}.Debug|x64.ActiveCfg = Debug|x64
+		{69582648-7512-4F0C-B126-661998ACB1FC}.Debug|x64.Build.0 = Debug|x64
+		{69582648-7512-4F0C-B126-661998ACB1FC}.Debug|x64.Deploy.0 = Debug|x64
+		{69582648-7512-4F0C-B126-661998ACB1FC}.Debug|x86.ActiveCfg = Debug|x86
+		{69582648-7512-4F0C-B126-661998ACB1FC}.Debug|x86.Build.0 = Debug|x86
+		{69582648-7512-4F0C-B126-661998ACB1FC}.Debug|x86.Deploy.0 = Debug|x86
+		{69582648-7512-4F0C-B126-661998ACB1FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69582648-7512-4F0C-B126-661998ACB1FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{69582648-7512-4F0C-B126-661998ACB1FC}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{69582648-7512-4F0C-B126-661998ACB1FC}.Release|ARM.ActiveCfg = Release|ARM
+		{69582648-7512-4F0C-B126-661998ACB1FC}.Release|ARM.Build.0 = Release|ARM
+		{69582648-7512-4F0C-B126-661998ACB1FC}.Release|ARM.Deploy.0 = Release|ARM
+		{69582648-7512-4F0C-B126-661998ACB1FC}.Release|x64.ActiveCfg = Release|x64
+		{69582648-7512-4F0C-B126-661998ACB1FC}.Release|x64.Build.0 = Release|x64
+		{69582648-7512-4F0C-B126-661998ACB1FC}.Release|x64.Deploy.0 = Release|x64
+		{69582648-7512-4F0C-B126-661998ACB1FC}.Release|x86.ActiveCfg = Release|x86
+		{69582648-7512-4F0C-B126-661998ACB1FC}.Release|x86.Build.0 = Release|x86
+		{69582648-7512-4F0C-B126-661998ACB1FC}.Release|x86.Deploy.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

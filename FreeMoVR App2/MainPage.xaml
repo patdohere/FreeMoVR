@@ -8,18 +8,32 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
         
-        <Button Grid.Row="0" Grid.Column="0" Name="initialize" Content="Initialization" FontSize="24"/>
-        <Button Grid.Row="0" Grid.Column="1" Name="pull" Content="Pull" FontSize="24"/>
-        <TextBlock Grid.Row="1" Grid.Column="0" Text="Stuff" FontSize="24"/>
-        <TextBlock Grid.Row="1" Grid.Column="1" Text="More Stuff" FontSize="24"/>
+        <StackPanel Grid.Row="0" VerticalAlignment="Bottom" HorizontalAlignment="Center">
+            <TextBlock Text="Welcome to FreeMoVR" FontSize="72" TextAlignment="Center"/>
+            <TextBlock Name="info" Text="" FontSize="72" TextAlignment="Center"/>
+        </StackPanel>
+        
+        <Grid Grid.Row="1" VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Column="0" Name="initialize" Content="Start" FontSize="54" HorizontalAlignment="Right" Margin="10" Click="TheButton_Click"/>
+            <Button Grid.Column="1" Name="stopButton" Content="Stop" FontSize="54" HorizontalAlignment="Left" Margin="10" Click="stop_Click"/>
+        </Grid>
+            
+            
+        
+        
+       
+        
+
+        
     </Grid>
 </Page>
