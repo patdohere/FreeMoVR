@@ -48,7 +48,7 @@ namespace FreeMoVR_App2
             acc.SensorValueChanged += SensorValueChanged;
             await acc.Initialize();
             await acc.EnableSensor();
-            await acc.SetReadPeriod(10);
+            await acc.SetReadPeriod(50);
             await acc.EnableNotifications();
         }
 

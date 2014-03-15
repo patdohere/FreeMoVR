@@ -24,7 +24,7 @@ namespace FreeMoVR_Simple_Server
             // if there is a missing .dll error here, make sure both vJoyInterface.dll and vJoyInterfaceWrap.dll is added to the project and also added 
             // in the same folder as the debug or release .exe, often times only the vJoyInterfaceWrap.dll is there.
             joystick.AcquireVJD(id); // this is the code that actually acquires the driver
-            inputRawCoords(0.0, 0.0);// set default coordinates upon construction
+            inputRawCoords(0.5, 0.5);// set default coordinates upon construction
         }
 
 
@@ -114,7 +114,7 @@ namespace FreeMoVR_Simple_Server
                         return "ERROR: You didn't set values properly!";
                     }
                     
-                    if (X <= 1.0 && Y <= 1.0 && X >= -1.0 && Y >= -1.0)
+                    if (X <= 1.0 && Y <= 1.0 && X >= 0.0 && Y >= 0.0)
                     {   
                         return inputRawCoords(X,Y);
                     }
@@ -201,8 +201,10 @@ namespace FreeMoVR_Simple_Server
         {
             //no motion in joystick is X = 16383, Y = 16383
             // y  = 16384x + 16384, calculation is done in this method
-            int xScaled = (int)Math.Floor(16384 * xRaw) + 16384;
-            int yScaled = (int)Math.Floor(16384 * yRaw) + 16384;
+
+            // y = 32768x is our new scale because the accelerometer goes from 0.0 to 1.0
+            int xScaled = (int)Math.Floor(32768 * xRaw);
+            int yScaled = (int)Math.Floor(32768 * yRaw);
             //Console.WriteLine("raw value in convert function X: " + xRaw + " Y: " + yRaw);
             joystick.SetAxis(xScaled, id, HID_USAGES.HID_USAGE_X);
             joystick.SetAxis(yScaled, id, HID_USAGES.HID_USAGE_Y);
@@ -229,8 +231,8 @@ namespace FreeMoVR_Simple_Server
         //retrieve scaled coords, used for debugging.
         private string retrieveScaledCoords()
         {
-            int xScaled = (int)Math.Floor(16384 * xRaw) + 16384;
-            int yScaled = (int)Math.Floor(16384 * yRaw) + 16384;
+            int xScaled = (int)Math.Floor(32768 * xRaw);
+            int yScaled = (int)Math.Floor(32768* yRaw);
             return "xScaled: " + xScaled + " yScaled: " + yScaled;
         }
 
