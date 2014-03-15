@@ -42,13 +42,15 @@ namespace FreeMoVR_App2
 
         private async void TheButton_Click(object sender, RoutedEventArgs e)
         {
+            
+
             initialize.IsEnabled = false;
             stopButton.IsEnabled = true;
             acc = new Accelerometer();
             acc.SensorValueChanged += SensorValueChanged;
             await acc.Initialize();
             await acc.EnableSensor();
-            await acc.SetReadPeriod(50);
+            await acc.SetReadPeriod(10);
             await acc.EnableNotifications();
         }
 
@@ -84,19 +86,18 @@ namespace FreeMoVR_App2
                             messageWriter = new DataWriter(webSocket.OutputStream);
                         }
 
-                            string message = null;
-                            byte[] accValue = await acc.ReadValue();
-                            double[] accAxis = Accelerometer.CalculateCoordinates(e.RawData, 1 / 64.0);
+                        string message = null;
+                        //byte[] accValue = await acc.ReadValue();
+                        double[] accAxis = Accelerometer.CalculateCoordinates(e.RawData, 1 / 64.0);
 
-                                double xRaw = accAxis[0] / 4;
-                                double yRaw = accAxis[1] / 4;
+                        double xRaw = accAxis[0] / 4;
+                        double yRaw = accAxis[1] / 4;
 
-                                message = "SET RAW_INPUT " + xRaw.ToString() + "," + yRaw.ToString();
-                                info.Text = message;
+                        message = "SET RAW_INPUT " + xRaw.ToString("0.00000") + "," + yRaw.ToString("0.00000");
+                        info.Text = message;
 
-
-                            messageWriter.WriteString(message);
-                            await messageWriter.StoreAsync();
+                        messageWriter.WriteString(message);
+                        await messageWriter.StoreAsync();
                         break;
                 }
             });

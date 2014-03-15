@@ -15,7 +15,7 @@
         
         <StackPanel Grid.Row="0" VerticalAlignment="Bottom" HorizontalAlignment="Center">
             <TextBlock Text="Welcome to FreeMoVR" FontSize="72" TextAlignment="Center"/>
-            <TextBlock Name="info" Text="" FontSize="72" TextAlignment="Center"/>
+            <TextBlock Name="info" Text="" FontSize="32" TextAlignment="Center"/>
         </StackPanel>
         
         <Grid Grid.Row="1" VerticalAlignment="Top">
